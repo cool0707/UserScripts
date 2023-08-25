@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         コドモン写真解像度アップ
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  コドモンの写真解像度を上げる
 // @author       Ryosuke
 // @match        https://parents.codmon.com/home
