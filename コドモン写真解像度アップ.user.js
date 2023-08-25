@@ -47,9 +47,8 @@
         const back = document.querySelector('.back-button')
         if (back) {
             back.click()
-            history.pushState(null, null, null)
         }
-        return
+        history.pushState(null, null, null)
     })
     history.pushState(null, null, null)
 })()
