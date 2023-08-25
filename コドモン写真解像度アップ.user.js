@@ -43,12 +43,15 @@
     replaceImageUrls()
 
     // 戻る無効
+    // 戻る無効
     window.addEventListener('popstate', event => {
         const back = document.querySelector('.back-button')
         if (back) {
             back.click()
+            if (!window.history?.state?.hookBackBtn) {
+                console.log("hook back btn.")
+                window.history.pushState({hookBackBtn: true}, '')
+            }
         }
-        history.pushState(null, null, null)
     })
-    history.pushState(null, null, null)
 })()
