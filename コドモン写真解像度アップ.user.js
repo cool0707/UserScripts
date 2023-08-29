@@ -46,6 +46,7 @@
     // 戻る無効
     window.addEventListener('popstate', event => {
         const back = document.querySelector('.back-button')
+        alert()
         if (back) {
             back.click()
             if (!window.history?.state?.hookBackBtn) {
