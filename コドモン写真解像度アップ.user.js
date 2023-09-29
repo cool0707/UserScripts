@@ -13,14 +13,37 @@
     'use strict';
 
     // 画像のURLを書き換え
+    function replaceImageUrl(img) {
+        const matches = img.src.match(/&width=(\d+)&/)
+        if (matches) {
+            const width = Number(matches[1])
+            let newWidth = 0
+
+            if (width == 500) {
+                if (img.naturalWidth > img.naturalHeight) {
+                    newWidth = 2150
+                } else {
+                    newWidth = 1612
+                }
+                img.style.aspectRatio = img.naturalWidth / img.naturalHeight
+            } else if (width > 1000 && img.naturalWidth == 0) {
+                newWidth = width - 100
+            }
+
+            if (newWidth > 0) {
+                img.addEventListener('error', (e) => {
+                    replaceImageUrl(e.target)
+                }, {once: true})
+                img.src = img.src.replace('&width=' + width + '&', '&width=' + newWidth + '&')
+            }
+        }
+    }
+
+    // 全画像のURLを書き換え
     function replaceImageUrls() {
         for (const img of document.querySelectorAll('img')){
             if (img.src.match(/documentations/)) {
-                if (img.naturalWidth > img.naturalHeight) {
-                    img.src = img.src.replace('&width=500&', '&width=2150&')
-                } else {
-                    img.src = img.src.replace('&width=500&', '&width=1612&')
-                }
+                replaceImageUrl(img)
             }
         }
     }
